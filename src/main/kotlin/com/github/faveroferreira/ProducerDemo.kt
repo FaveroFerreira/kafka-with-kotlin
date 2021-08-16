@@ -16,7 +16,7 @@ fun main() {
 
     val producer = KafkaProducer<String, String>(props)
 
-    val record = ProducerRecord<String, String>(TOPIC_NAME, "Hello World 2!")
+    val record = ProducerRecord<String, String>(TOPIC_NAME, "Hello World!")
 
     producer.send(record)
     producer.close()

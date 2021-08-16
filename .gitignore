@@ -71,3 +71,4 @@ outTmp/
 kotlin-ide/
 /.idea/vcs.xml
 /.gradle/
+/.idea/uiDesigner.xml

@@ -3,9 +3,7 @@ package com.github.faveroferreira
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig.*
 import org.apache.kafka.clients.producer.ProducerRecord
-import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.common.serialization.StringSerializer
-import java.lang.Exception
 import java.util.*
 
 fun main() {
@@ -17,7 +15,7 @@ fun main() {
 
     val producer = KafkaProducer<String, String>(props)
 
-    val record = ProducerRecord<String, String>(TOPIC_NAME, "Hello World 2!")
+    val record = ProducerRecord<String, String>(TOPIC_NAME, "Hello World!")
 
     producer.send(record) { metadata, exception ->
         metadata ?: throw RuntimeException("Error producing record with exception: $exception")
