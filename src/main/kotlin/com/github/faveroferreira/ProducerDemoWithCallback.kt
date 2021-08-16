@@ -3,9 +3,10 @@ package com.github.faveroferreira
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig.*
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.common.serialization.StringSerializer
+import java.lang.Exception
 import java.util.*
-
 
 fun main() {
     val props = Properties().apply {
@@ -18,6 +19,17 @@ fun main() {
 
     val record = ProducerRecord<String, String>(TOPIC_NAME, "Hello World 2!")
 
-    producer.send(record)
+    producer.send(record) { metadata, exception ->
+        metadata ?: throw RuntimeException("Error producing record with exception: $exception")
+
+        println("""
+                Success producing record with: 
+                    - topic: ${metadata.topic()}
+                    - partition: ${metadata.partition()}
+                    - offset: ${metadata.offset()}
+                    - timestamp: ${metadata.timestamp()}
+            """.trimIndent())
+    }
+
     producer.close()
 }
